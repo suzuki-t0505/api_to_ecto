@@ -24,3 +24,5 @@ api_to_ecto-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+sample.csv

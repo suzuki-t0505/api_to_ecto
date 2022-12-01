@@ -10,5 +10,7 @@ defmodule ApiToEcto.Repo.Migrations.CreatePlaces do
 
       timestamps()
     end
+
+    create unique_index(:places, [:name, :address], name: :places_name_address_index)
   end
 end
