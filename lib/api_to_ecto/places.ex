@@ -1,6 +1,7 @@
 defmodule ApiToEcto.Places do
   alias ApiToEcto.Repo
   alias ApiToEcto.Place
+  import Ecto.Query
 
   def get_places() do
     Repo.all(Place)
@@ -33,4 +34,27 @@ defmodule ApiToEcto.Places do
   end
 
   def delete_place(_id), do: nil
+
+  def get_place_by_name(name) do
+    Place
+    |> where([p], p.name == ^name)
+    |> Repo.one()
+  end
+
+  def select_address() do
+    Place
+    |> select([p], p.address)
+    |> Repo.all()
+  end
+
+  def get_places_to_search_by_address(value) do
+    pattern = "%#{value}%"
+
+    query =
+      from(p in Place,
+        where: like(p.address, ^pattern)
+      )
+
+    Repo.all(query)
+  end
 end
